@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import themes from '../utils/colors';
 
 export default function TaskItem({ task, onDelete, onToggle, theme }) {
     console.log('TASKITEM THEME:', theme);
@@ -23,7 +22,6 @@ export default function TaskItem({ task, onDelete, onToggle, theme }) {
         onToggle(task.id);
     };
     const styles = getStyles(theme);
-    ;
 
     return (
         <Animatable.View
@@ -61,7 +59,6 @@ const getStyles = (theme) => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 15,
-        backgroundColor: theme.background,
         borderRadius: 10,
         marginVertical: 5,
     },

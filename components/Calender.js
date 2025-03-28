@@ -38,6 +38,8 @@ export default function Calender({ onDateSelect, theme }) {
         onDateSelect && onDateSelect(date);
     };
 
+    const today = new Date();
+
     return (
         <View style={styles.container}>
             <View style={styles.headerRow}>
@@ -76,18 +78,23 @@ export default function Calender({ onDateSelect, theme }) {
             <View style={styles.grid}>
                 {days.map((day, index) => {
                     const isSelected = selectedDate?.toDateString() === day?.toDateString();
+                    const isToday = day?.toDateString() === today.toDateString();
 
                     return (
                         <Animatable.View
                             key={index}
-                            animation={isSelected ? 'pulse' : undefined}
+                            animation={isSelected ? 'jello' : undefined}
                             iterationCount='infinite'
                             duration={1500}
                             style={[
                                 styles.dayBox,
                                 day && isSelected && {
-                                    BackgroundColor: theme.accent,
+                                    backgroundColor: theme.accent,
                                     transform: [{ scale: 1.05 }],
+                                },
+                                isToday && !isSelected && {
+                                    borderWidth: 2,
+                                    borderColor: theme.accent,
                                 },
                             ]}
                         >
@@ -100,6 +107,11 @@ export default function Calender({ onDateSelect, theme }) {
                                         {
                                             color: day ? theme.text : 'transparent',
                                             fontWeight: 'bold',
+                                        },
+                                        theme.name === 'cyberpunk' && isToday && !isSelected && {
+                                            textShadowColor: '#39ff14',
+                                            textShadowOffset: { width: 0, height: 0 },
+                                            textShadowRadius: 10,
                                         },
                                         theme.name === 'cyberpunk' && isSelected && {
                                             color: '#39ff14',
@@ -118,9 +130,9 @@ export default function Calender({ onDateSelect, theme }) {
             </View>
             <TouchableOpacity
                 onPress={() => onDateSelect(null)}
-                style={[styles.cancelButton, { backgroundColor: theme.accent }]}
+                style={styles.cancelButton}
             >
-                <Text style={styles.cancelButtonText}>Cancel ✗</Text>
+                <Text style={[styles.cancelButtonText, { color: theme.accent }]}>Cancel ✗</Text>
             </TouchableOpacity>
         </View>
     );
@@ -182,6 +194,5 @@ const styles = StyleSheet.create({
     },
     cancelButtonText: {
         fontWeight: 'bold',
-        color: '#333',
     },
 });

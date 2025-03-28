@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import themes from "../utils/colors";
 import TaskItem from "../components/TaskItem";
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import Calender from "../components/Calender";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export default function HomeScreen() {
     const [task, setTask] = useState('');
@@ -41,6 +43,30 @@ export default function HomeScreen() {
         );
         setTaskList(updatedList);
     };
+    useEffect(() => {
+        const loadTasks = async () => {
+            try {
+                const storedTasks = await AsyncStorage.getItem('taskList');
+                if (storedTasks) {
+                    setTaskList(JSON.parse(storedTasks));
+                }
+            } catch (e) {
+                console.log('Error loading tasks:', e);
+            }
+        };
+        loadTasks();
+    }, []);
+
+    useEffect(() => {
+        const saveTasks = async () => {
+            try {
+                await AsyncStorage.setItem('taskList', JSON.stringify(taskList));
+            } catch (e) {
+                console.log('Error saving tasks', e);
+            }
+        };
+        saveTasks();
+    }, [taskList]);
 
     return (
         <Animatable.View
