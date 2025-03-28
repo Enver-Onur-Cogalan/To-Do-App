@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import themes from '../utils/colors';
 
-
-export default function TaskItem({ task, onDelete, onToggle }) {
+export default function TaskItem({ task, onDelete, onToggle, theme }) {
+    console.log('TASKITEM THEME:', theme);
     const viewRef = useRef(null);
     const textRef = useRef(null);
 
@@ -21,12 +22,13 @@ export default function TaskItem({ task, onDelete, onToggle }) {
         }
         onToggle(task.id);
     };
-
+    const styles = getStyles(theme);
+    ;
 
     return (
         <Animatable.View
             ref={viewRef}
-            animation='fadeIn'
+            animation={task.completed ? 'zoomIn' : 'zoomInDown'}
             duration={500}
             style={styles.taskContainer}
         >
@@ -49,14 +51,14 @@ export default function TaskItem({ task, onDelete, onToggle }) {
 
 
 
-const styles = StyleSheet.create({
+const getStyles = (theme) => StyleSheet.create({
     taskContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 15,
-        backgroundColor: 'f1f1f1',
+        backgroundColor: theme.background,
         borderRadius: 10,
         marginVertical: 5,
     },
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         maxWidth: '70%',
         flexShrink: 1,
+        color: theme.text,
     },
     deleteText: {
         fontSize: 20,
@@ -71,6 +74,6 @@ const styles = StyleSheet.create({
     },
     completedText: {
         textDecorationLine: 'line-through',
-        color: 'gray',
+        color: theme.completed,
     },
 });
