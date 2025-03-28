@@ -40,6 +40,9 @@ export default function TaskItem({ task, onDelete, onToggle, theme }) {
                 >
                     {task.text}
                 </Animatable.Text>
+                {task.deadline && (
+                    <Text style={styles.deadlineText}>⏰ {task.deadline}</Text>
+                )}
             </TouchableOpacity>
             <TouchableOpacity onPress={handleDelete}>
                 <Text style={styles.deleteText}>🗑️</Text>
@@ -75,5 +78,10 @@ const getStyles = (theme) => StyleSheet.create({
     completedText: {
         textDecorationLine: 'line-through',
         color: theme.completed,
+    },
+    deadlineText: {
+        fontSize: 12,
+        color: '#ffa500',
+        marginTop: 4,
     },
 });

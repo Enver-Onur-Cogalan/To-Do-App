@@ -3,6 +3,7 @@ import themes from "../utils/colors";
 import TaskItem from "../components/TaskItem";
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as Animatable from 'react-native-animatable';
+import Calender from "../components/Calender";
 
 export default function HomeScreen() {
     const [task, setTask] = useState('');
@@ -11,14 +12,21 @@ export default function HomeScreen() {
     const [theme, setTheme] = useState(themes.dark);
     const styles = getStyles(theme);
 
+    const [deadline, setDeadline] = useState(null);
+    const [showCalender, setShowCalender] = useState(false);
+
+
     const addTask = () => {
         if (task.trim()) {
             const newTask = {
                 id: Date.now().toString(),
                 text: task,
+                completed: false,
+                deadline: deadline ? deadline.toDateString() : null,
             };
             setTaskList([...taskList, newTask]);
             setTask('');
+            setDeadline(null);
         }
     };
 
@@ -58,6 +66,28 @@ export default function HomeScreen() {
                 keyboardType='default'
                 editable={true}
             />
+
+            <TouchableOpacity
+                onPress={() => setShowCalender(!showCalender)} style={styles.calenderButton} >
+                <Text style={styles.calenderButtonText}>
+                    {deadline ? `Deadline: ${deadline.toDateString()}` : '📆 Select Deadline'}
+                </Text>
+            </TouchableOpacity>
+
+            {showCalender && (
+                <Calender
+                    onDateSelect={(date) => {
+                        if (date) {
+                            setDeadline(date);
+                        }
+                        setTimeout(() => {
+                            setShowCalender(false);
+                        }, 500);
+                    }}
+                    theme={theme}
+                />
+            )}
+
             <Animatable.View animation='bounceIn' duration={500}>
                 <TouchableOpacity onPress={addTask} activeOpacity={0.8} style={styles.addButton}>
                     <Animatable.Text
@@ -184,5 +214,14 @@ const getStyles = (theme) =>
             fontSize: 20,
             color: '#fff',
         },
-
+        calenderButton: {
+            backgroundColor: theme.accent,
+            padding: 10,
+            borderRadius: 10,
+            alignItems: 'center',
+            marginBottom: 10,
+        },
+        calenderButtonText: {
+            color: theme.buttonText,
+        },
     });
