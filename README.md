@@ -1,97 +1,69 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📝 To Do App
 
-# Getting Started
+A simple yet animated React Native To-Do application with theme switching, deadline support, and custom calendar.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🚀 Features
 
-## Step 1: Start Metro
+- ✅ Add, complete, and delete tasks
+- 🎨 Three dynamic themes:  
+  - **Green-Dark** (Default)  
+  - **Light**  
+  - **Cyberpunk**  
+- 🔄 Animated UI using `react-native-animatable`
+- 📅 Custom-built calendar for selecting deadlines
+- 🗓️ Displays task deadlines and highlights them
+- 🧠 Task persistence via `@react-native-async-storage/async-storage`
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🎨 Theme Preview
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Switch between themes using the buttons at the bottom of the screen.
 
-```sh
-# Using npm
-npm start
+Each theme changes:
+- Background colors  
+- Task card colors  
+- Accent colors  
+- Button styles  
+- Headline animations
 
-# OR using Yarn
-yarn start
+> ⚠️ Note: We removed one of the animations related to theme switching due to a minor conflict with another animation library. The smooth transition animation remains active.
+
+## 🛠 Tech Stack
+
+- **React Native**
+- **AsyncStorage**
+- **React Native Animatable**
+- **Custom Date Selector** (No third-party date picker used)
+- **FlatList**, **TouchableOpacity**, **TextInput**
+
+## 🗂 Folder Structure
+
+```
+/components
+  - TaskItem.js
+  - Calender.js
+/utils
+  - colors.js
+/screens
+  - HomeScreen.js
 ```
 
-## Step 2: Build and run your app
+## 📦 Installation
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```bash
+git clone https://github.com/Enver-Onur-Cogalan/To-Do-App.git
+cd toDoApp
+npm install
+npx react-native run-ios # or run-android
 ```
 
-### iOS
+> ⚠️ Make sure you have a working React Native environment set up. Check [React Native Environment Setup](https://reactnative.dev/docs/environment-setup).
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 📌 Important Notes
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+- Animations are used throughout the app for a smoother and more engaging experience.
+- Calendar is built from scratch to allow styling and animations.
+- Deadline highlighting is active but the red background effect was removed during the final revision for clarity.
 
-```sh
-bundle install
-```
+---
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Made with ❤️ by Enver Onur Çoğalan
