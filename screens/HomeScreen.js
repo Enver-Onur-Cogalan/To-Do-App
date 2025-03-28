@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import TaskItem from "../components/TaskItem";
-import { Button, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
+import { Animated, Button, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import * as Animatable from 'react-native-animatable';
 
 export default function HomeScreen() {
     const [task, setTask] = useState('');
@@ -41,7 +42,19 @@ export default function HomeScreen() {
                 keyboardType='default'
                 editable={true}
             />
-            <Button title="Add" onPress={addTask} />
+            <Animatable.View animation='bounceIn' duration={500}>
+                <TouchableOpacity onPress={addTask} activeOpacity={0.8} style={styles.addButton}>
+                    <Animatable.Text
+                        animation='pulse'
+                        iterationCount='infinite'
+                        iterationDelay={3000}
+                        style={styles.addButtonText}
+                    >
+                        ➕〈 Add Task 〉
+                    </Animatable.Text>
+                </TouchableOpacity>
+            </Animatable.View>
+
             <FlatList
                 data={taskList}
                 keyExtractor={item => item.id}
@@ -70,5 +83,22 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         borderRadius: 5,
+    },
+    addButton: {
+        backgroundColor: '#adff2f',
+        paddingVertical: 12,
+        paddingHorizontal: 25,
+        borderRadius: 25,
+        alignItems: 'center',
+        alignSelf: 'center',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+    },
+    addButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold',
     },
 });
